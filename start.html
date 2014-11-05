@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+
+<ul id="groups"></ul>
+
+    <span id="results"></span>
+
+
+
+
+
+
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="underscore-min.js"></script>
+
+<script>
+
+	
+
+
+//start ajax request
+                $.ajax({
+                    url: "http://www.stellarbiotechnologies.com/media/press-releases/json",
+                    //force to handle it as text
+                    dataType: "text",
+                    success: function(data) {
+                        
+                        //data downloaded so we call parseJSON function 
+                        //and pass downloaded data
+						
+						
+                        var json = $.parseJSON(data);
+                        //now json variable contains data in json format
+                        //let's display a few items
+						
+
+
+
+sortedArray = _.sortBy(json.news, function (obj) { 
+ return obj.published;
+});
+
+
+var items =[];
+
+for (var i = 0; i < sortedArray.length; i++) {
+    
+	
+	var counter = sortedArray[i];
+	
+	
+
+	
+	   items.push( "<li id='" + counter.title + "'> title:" + counter.title + '<br />published: ' + counter.published  +  "</li>" );
+	   
+	   
+	   
+	   
+	   
+	   
+ 
+	  
+}	
+			
+			
+	$( "<ul/>", {
+"class": "my-new-list",
+html: items.join( "" )
+}).appendTo( "body" );
+	  
+	 		
+			
+			
+			
+			
+			
+                    }
+                });
+
+
+	
+	
+</script>
+
+
+</body>
+</html>
